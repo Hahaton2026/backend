@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="2026-13-02--001-defectTypes-data" author="sabakumov">
+        <loadData tableName="defect_types" file="db.changelog/data/csv/2026-13-02--0001-defectTypes-data.csv"
+                  separator=";"
+                  quotchar='"'
+                  encoding="UTF-8"/>
+    </changeSet>
+</databaseChangeLog>
