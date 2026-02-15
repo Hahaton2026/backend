@@ -16,6 +16,7 @@ import ru.fsog.tmhHacaton2026.repository.DefectRepository;
 import ru.fsog.tmhHacaton2026.repository.DefectTypesRepository;
 import ru.fsog.tmhHacaton2026.repository.PhotoRepository;
 import ru.fsog.tmhHacaton2026.service.DefectService;
+import ru.fsog.tmhHacaton2026.service.MetroLineResolverService;
 import ru.fsog.tmhHacaton2026.util.DefectMapper;
 
 import java.beans.Transient;
@@ -32,6 +33,7 @@ public class DefectServiceImpl implements DefectService {
     private final DefectRepository defectRepository;
     private final DefectTypesRepository defectTypesRepository;
     private final PhotoRepository photoRepository;
+    private final MetroLineResolverService metroLineResolver;
 
 //    @Override
 //    @Transactional
@@ -81,6 +83,7 @@ public class DefectServiceImpl implements DefectService {
     }
 
     @Override
+    @Transactional
     public DefectDetailsDTO saveDescriptionOfPhoto(DefectDetailsDTO data) {
 
         Optional<DefectTypes> optionalDefectTypes = defectTypesRepository.findByName(data.getTypeName());
@@ -92,15 +95,23 @@ public class DefectServiceImpl implements DefectService {
             throw new PhotoNotFoundException("Photo with id="+data.getPhotoId()+" not found");
         }
 
+
+        String detectedLine = metroLineResolver.getLineByCoords(data.getLatitude(), data.getLongitude());
+
+
         Defect defect = new Defect();
         defect.setDefectTypes(optionalDefectTypes.get());
         defect.setComment(data.getComment());
         defect.setLine(data.getLine());
         defect.setPhoto(optionalPhoto.get());
+        defect.setLine(detectedLine);
+        defect.setLatitude(data.getLatitude());
+        defect.setLongitude(data.getLongitude());
+
 
         defect = defectRepository.save(defect);
 
-        return null;
+        return DefectMapper.convertToDto(defect);
     }
 
 

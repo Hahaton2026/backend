@@ -27,4 +27,10 @@ public class Defect {
 
     @Column(name = "line")
     private String line;
+
+    @Column(name = "latitude")
+    private Double latitude;
+
+    @Column(name = "longitude")
+    private Double longitude;
 }

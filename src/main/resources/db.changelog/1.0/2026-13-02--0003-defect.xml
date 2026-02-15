@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+        <changeSet id="2026-13-02--0003-defect" author="sabakumov">
+            <preConditions onFail="MARK_RAN">
+                <not>
+                    <tableExists tableName="defect"/>
+                </not>
+            </preConditions>
+            
+            <createTable tableName="defect">
+                <column name="id" type="BIGINT" autoIncrement="true">
+                    <constraints primaryKey="true" nullable="false"/>
+                </column>
+                <column name="type_id" type="BIGINT" >
+                    <constraints nullable="false"
+                                 foreignKeyName="fk_defect_type"
+                                 referencedTableName="defect_types"
+                                 referencedColumnNames="id"/>
+                </column>
+                <column name="photo_id" type="BIGINT">
+                    <constraints nullable="false"
+                                 foreignKeyName="fk_defect_photo"
+                                 referencedTableName="photo"
+                                 referencedColumnNames="id"/>
+                </column>
+                <column name="comment" type="VARCHAR(100)">
+                </column>
+
+                <column name="line" type="VARCHAR(100)">
+                    <constraints nullable="false"/>
+                </column>
+
+                <column name="latitude" type="DOUBLE">
+                    <constraints nullable="false"/>
+                </column>
+
+                <column name="longitude" type="DOUBLE">
+                    <constraints nullable="false"/>
+                </column>
+            </createTable>
+        </changeSet>
+</databaseChangeLog>

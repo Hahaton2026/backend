@@ -58,6 +58,12 @@
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-spatial</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.locationtech.jts</groupId>
+            <artifactId>jts-core</artifactId>
+            <version>1.19.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -73,6 +79,8 @@
                     <password>tmh_db</password>
                     <outputChangeLogFile>src/main/resources/db.changelog/db.changelog-master.xml</outputChangeLogFile>
                     <changeLogFile>src/main/resources/db.changelog/db.changelog-master.xml</changeLogFile>
+
+                    <referenceUrl>hibernate:spring:com.example.hacaton2026.entities?dialect=org.hibernate.dialect.PostgreSQLDialect</referenceUrl>
                 </configuration>
             </plugin>
 

@@ -15,6 +15,8 @@ public class DefectMapper {
         if (defect.getPhoto() != null) {
             defectDetailsDTO.setPhotoId(defect.getPhoto().getId());
         }
+        defectDetailsDTO.setLatitude(defect.getLatitude());
+        defectDetailsDTO.setLongitude(defect.getLongitude());
         return defectDetailsDTO;
     }
 }

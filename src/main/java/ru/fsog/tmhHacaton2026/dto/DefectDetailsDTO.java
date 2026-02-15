@@ -10,4 +10,6 @@ public class DefectDetailsDTO {
     private String comment;
     private String line;
     private long photoId;
+    private Double latitude;
+    private Double longitude;
 }
