@@ -95,18 +95,12 @@ public class DefectServiceImpl implements DefectService {
             throw new PhotoNotFoundException("Photo with id="+data.getPhotoId()+" not found");
         }
 
-
-        String detectedLine = metroLineResolver.getLineByCoords(data.getLatitude(), data.getLongitude());
-
-
         Defect defect = new Defect();
         defect.setDefectTypes(optionalDefectTypes.get());
         defect.setComment(data.getComment());
         defect.setLine(data.getLine());
         defect.setPhoto(optionalPhoto.get());
-        defect.setLine(detectedLine);
-        defect.setLatitude(data.getLatitude());
-        defect.setLongitude(data.getLongitude());
+        defect.setLine(data.getLine());
 
 
         defect = defectRepository.save(defect);

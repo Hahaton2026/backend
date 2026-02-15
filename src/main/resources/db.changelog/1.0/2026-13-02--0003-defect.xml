@@ -44,4 +44,12 @@
                 </column>
             </createTable>
         </changeSet>
+        <changeSet id="2026-15-02--0003-defect" author="sabakumov">
+            <preConditions onFail="MARK_RAN">
+                <columnExists tableName="defect" columnName="latitude"/>
+                <columnExists tableName="defect" columnName="longitude"/>
+            </preConditions>
+            <dropColumn tableName="latitude"/>
+            <dropColumn tableName="longitude"/>
+        </changeSet>
 </databaseChangeLog>
