@@ -49,7 +49,7 @@
                 <columnExists tableName="defect" columnName="latitude"/>
                 <columnExists tableName="defect" columnName="longitude"/>
             </preConditions>
-            <dropColumn tableName="latitude"/>
-            <dropColumn tableName="longitude"/>
+            <dropColumn columnName="latitude" tableName="defect"/>
+            <dropColumn columnName="longitude" tableName="defect"/>
         </changeSet>
 </databaseChangeLog>
