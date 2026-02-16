@@ -6,8 +6,10 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
     <include file="db.changelog/1.0/2026-13-02--0001-defectTypes.xml"/>
+    <include file="db.changelog/data/2026-13-02--0001-defectTypes-data.xml"/>
     <include file="db.changelog/1.0/2026-13-02--0002-photo.xml"/>
     <include file="db.changelog/1.0/2026-13-02--0003-defect.xml"/>
-    <include file="db.changelog/data/2026-13-02--001-defectTypes-data.xml"/>
+    <include file="db.changelog/1.0/2026-16-02--0004-security.xml"/>
+    <include file="db.changelog/data/2026-16-02--0004-security-data.xml"/>
 
 </databaseChangeLog>
