@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 import ru.fsog.tmhHacaton2026.dto.DefectDetailsDTO;
 import ru.fsog.tmhHacaton2026.dto.DefectTypesDTO;
+import ru.fsog.tmhHacaton2026.entity.Photo;
 
 import java.io.IOException;
 import java.util.List;
@@ -28,5 +29,7 @@ public interface DefectService {
     public void markAsFixed(long id);
 
     void addDefectType(DefectTypesDTO data);
+
+    Photo getPhotoById(long id);
 
 }

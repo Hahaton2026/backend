@@ -77,5 +77,6 @@ public class DefectController {
         defectService.addDefectType(defectTypesDTO);
         return ResponseEntity.ok("Новый тип дефекта успешно добавлен");
     }
+
 }
 

@@ -139,5 +139,17 @@ public class DefectServiceImpl implements DefectService {
         defectTypesRepository.save(type);
     }
 
+    @Override
+    public Photo getPhotoById(long id) {
+
+        Optional<Photo> optionalPhoto = photoRepository.findById(id);
+
+        if (optionalPhoto.isEmpty()) {
+            throw new PhotoNotFoundException("Person with id " + id + " not found");
+        }
+
+        return optionalPhoto.get();
+    }
+
 
 }

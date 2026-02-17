@@ -1,9 +1,13 @@
 package ru.fsog.tmhHacaton2026.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.fsog.tmhHacaton2026.dto.DefectDetailsDTO;
+import ru.fsog.tmhHacaton2026.entity.Photo;
+import ru.fsog.tmhHacaton2026.repository.PhotoRepository;
 import ru.fsog.tmhHacaton2026.service.DefectService;
 
 import java.util.List;
@@ -29,5 +33,14 @@ public class AdminController {
     public ResponseEntity<Void> markAsFixed(@PathVariable long id) {
         defectService.markAsFixed(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/getPhoto/{id}")
+    public ResponseEntity<byte[]> getPhoto(@PathVariable long id) {
+        Photo photo = defectService.getPhotoById(id);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.IMAGE_JPEG_VALUE) // или IMAGE_PNG_VALUE
+                .body(photo.getPhoto()); // Возвращаем только массив байтов
     }
 }
