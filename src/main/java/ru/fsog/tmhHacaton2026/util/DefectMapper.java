@@ -12,6 +12,7 @@ public class DefectMapper {
         defectDetailsDTO.setTypeName(defect.getDefectTypes().getName());
         defectDetailsDTO.setComment(defect.getComment());
         defectDetailsDTO.setLine(defect.getLine());
+        defectDetailsDTO.setStatus(defect.isStatus());
         if (defect.getPhoto() != null) {
             defectDetailsDTO.setPhotoId(defect.getPhoto().getId());
         }

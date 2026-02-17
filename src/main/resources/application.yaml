@@ -25,10 +25,10 @@ spring:
     activate:
       on-profile: docker
   datasource:
-    url: jdbc:postgresql://db:5432/postgres
+    url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: tmh_db
-#  jdbc:postgresql://localhost:5432/postgres
+#  jdbc:postgresql://db:5432/postgres
 ---
 spring:
   config:

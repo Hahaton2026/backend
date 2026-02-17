@@ -65,17 +65,17 @@ public class DefectController {
     public ResponseEntity<List<DefectTypesDTO>> getAllDefectsTypesPaginated() {
         return ResponseEntity.ok(defectTypeService.getAllDefectTypes());
     }
+
+    @PostMapping("/add-defect-types")
+    public ResponseEntity<String> addDefectType(
+            @RequestBody DefectTypesDTO defectTypesDTO
+    ) {
+        if (defectTypesDTO.getName() == null || defectTypesDTO.getName().isBlank()) {
+            return ResponseEntity.badRequest().body("Название типа не может быть пустым");
+        }
+
+        defectService.addDefectType(defectTypesDTO);
+        return ResponseEntity.ok("Новый тип дефекта успешно добавлен");
+    }
 }
 
-
-//    @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-//    @RequestBody(content = @Content(encoding = @Encoding(name = "personDTO", contentType = "application/json")))
-//    public ResponseEntity<DefectDetailsDTO> uploadDefectData(
-//            @RequestPart("file") MultipartFile file,
-//            @Parameter(content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE))
-//            @RequestPart("data") String dataJson) throws IOException {
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        objectMapper.findAndRegisterModules();
-//        DefectDetailsDTO data = objectMapper.readValue(dataJson, DefectDetailsDTO.class);
-//        return ResponseEntity.ok(defectService.createDefect(file, data));
-//    }

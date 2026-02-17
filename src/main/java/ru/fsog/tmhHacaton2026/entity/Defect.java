@@ -28,6 +28,9 @@ public class Defect {
     @Column(name = "line")
     private String line;
 
+    @Column(name = "status")
+    private boolean status;
+
 //    @Column(name = "latitude")
 //    private Double latitude;
 //

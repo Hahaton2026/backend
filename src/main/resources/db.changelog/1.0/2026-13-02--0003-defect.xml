@@ -52,4 +52,18 @@
             <dropColumn columnName="latitude" tableName="defect"/>
             <dropColumn columnName="longitude" tableName="defect"/>
         </changeSet>
+
+    <changeSet id="2026-16-02--0003-status" author="sabakumov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="defect" columnName="status"/>
+            </not>
+        </preConditions>
+
+        <addColumn tableName="defect">
+            <column name="status" type="BOOLEAN" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

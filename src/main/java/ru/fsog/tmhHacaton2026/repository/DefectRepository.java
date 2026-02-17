@@ -10,4 +10,6 @@ import java.util.List;
 public interface DefectRepository extends JpaRepository<Defect, Long> {
     @Override
     Page<Defect> findAll(Pageable pageable);
+
+    List<Defect> findAllByStatusFalse();
 }

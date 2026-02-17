@@ -1,5 +1,6 @@
 package ru.fsog.tmhHacaton2026.service.Impl;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -7,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.fsog.tmhHacaton2026.dto.DefectDetailsDTO;
+import ru.fsog.tmhHacaton2026.dto.DefectTypesDTO;
 import ru.fsog.tmhHacaton2026.entity.Defect;
 import ru.fsog.tmhHacaton2026.entity.DefectTypes;
 import ru.fsog.tmhHacaton2026.entity.Photo;
@@ -59,7 +61,7 @@ public class DefectServiceImpl implements DefectService {
 //    }
 
     @Override
-    public List<DefectDetailsDTO> getAllDefects(Pageable pageable) {
+    public List<DefectDetailsDTO> getAllDefects() {
         return defectRepository.findAll().stream()
                 .map(DefectMapper::convertToDto)
                 .collect(Collectors.toList());
@@ -83,6 +85,11 @@ public class DefectServiceImpl implements DefectService {
     }
 
     @Override
+    public void deleteDefect(Long id) {
+        defectRepository.deleteById(id);
+    }
+
+    @Override
     @Transactional
     public DefectDetailsDTO saveDescriptionOfPhoto(DefectDetailsDTO data) {
 
@@ -101,11 +108,35 @@ public class DefectServiceImpl implements DefectService {
         defect.setLine(data.getLine());
         defect.setPhoto(optionalPhoto.get());
         defect.setLine(data.getLine());
+        defect.setStatus(false);
 
 
         defect = defectRepository.save(defect);
 
         return DefectMapper.convertToDto(defect);
+    }
+
+    @Override
+    public List<DefectDetailsDTO> getAllNewDefects() {
+        return defectRepository.findAllByStatusFalse()
+                .stream()
+                .map(DefectMapper::convertToDto)
+                .toList();
+    }
+
+    @Transactional
+    public void markAsFixed(long id) {
+        Defect defect = defectRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Дефект с ID " + id + " не найден"));
+
+        defect.setStatus(true);
+    }
+
+    @Override
+    public void addDefectType(DefectTypesDTO dto) {
+        DefectTypes type = new DefectTypes();
+        type.setName(dto.getName());
+        defectTypesRepository.save(type);
     }
 
 
