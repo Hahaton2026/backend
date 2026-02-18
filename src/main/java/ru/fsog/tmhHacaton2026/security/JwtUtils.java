@@ -12,7 +12,6 @@ import java.util.Date;
 @Component
 public class JwtUtils {
 
-    // Секрет должен быть длинным (минимум 32 байта для HS256)
     private final String jwtSecret = "your_ultra_secret_key_that_must_be_very_long_at_least_32_chars";
     private final long jwtExpirationMs = 86400000;
 
@@ -22,18 +21,18 @@ public class JwtUtils {
 
     public String generateToken(String username) {
         return Jwts.builder()
-                .subject(username) // В 0.13.0 методы без префикса set
+                .subject(username)
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + jwtExpirationMs))
-                .signWith(getSigningKey()) // Алгоритм определяется автоматически по ключу
+                .signWith(getSigningKey())
                 .compact();
     }
 
     public String getUsernameFromToken(String token) {
         return Jwts.parser()
-                .verifyWith(getSigningKey()) // Новый метод вместо setSigningKey
+                .verifyWith(getSigningKey())
                 .build()
-                .parseSignedClaims(token) // Вместо parseClaimsJws
+                .parseSignedClaims(token)
                 .getPayload()
                 .getSubject();
     }
